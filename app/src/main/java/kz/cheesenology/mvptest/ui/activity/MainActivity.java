@@ -9,10 +9,14 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
+import javax.inject.Inject;
+
+import kz.cheesenology.mvptest.MvpApplication;
 import kz.cheesenology.mvptest.R;
 import kz.cheesenology.mvptest.data.db.LocalCars;
 import kz.cheesenology.mvptest.data.db.LocalMark;
-import kz.cheesenology.mvptest.data.db.dao.AppDatabase;
+import kz.cheesenology.mvptest.data.db.dao.CarsDao;
+import kz.cheesenology.mvptest.data.db.dao.MarkDao;
 import kz.cheesenology.mvptest.presenter.MainPresenter;
 import kz.cheesenology.mvptest.ui.view.MainView;
 
@@ -22,12 +26,19 @@ public class MainActivity extends MvpAppCompatActivity
     @InjectPresenter
     MainPresenter presenter;
 
+    @Inject
+    CarsDao carsDao;
+    @Inject
+    MarkDao markDao;
+
     Button btnClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MvpApplication.app().appComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         btnClick = findViewById(R.id.btnSwitchActivity);
         btnClick.setOnClickListener(new View.OnClickListener() {
@@ -37,31 +48,31 @@ public class MainActivity extends MvpAppCompatActivity
             }
         });
 
-        populateCarsWithData(AppDatabase.getAppDatabase(getApplicationContext()));
+        populateCarsWithData();
     }
 
-    private LocalCars addCar(final AppDatabase db, LocalCars cars) {
-        db.carsDao().insertAll(cars);
+    private LocalCars addCar(LocalCars cars) {
+        carsDao.insertAll(cars);
         return cars;
     }
 
-    private LocalMark addMark(final AppDatabase db, LocalMark cars) {
-        db.markDao().insertAll(cars);
+    private LocalMark addMark(LocalMark cars) {
+        markDao.insertAll(cars);
         return cars;
     }
 
 
-    private void populateCarsWithData(AppDatabase db) {
+    private void populateCarsWithData() {
         //adding marks
         LocalMark mark = new LocalMark();
         mark.setMarkID(1);
         mark.setMarkName("Ferrari");
-        addMark(db, mark);
+        addMark(mark);
         //adding cars
         LocalCars cars = new LocalCars();
         cars.setCarName("Enzo");
         cars.setMarkID(1);
-        addCar(db, cars);
+        addCar(cars);
 
 
     }

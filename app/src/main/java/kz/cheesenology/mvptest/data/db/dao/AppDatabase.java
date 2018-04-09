@@ -1,6 +1,8 @@
 package kz.cheesenology.mvptest.data.db.dao;
 
+import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.room.Database;
+import android.arch.persistence.room.DatabaseConfiguration;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
@@ -16,7 +18,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CarsDao carsDao();
     public abstract MarkDao markDao();
 
-    public static AppDatabase getAppDatabase(Context context) {
+    /*public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "mycars")
@@ -29,5 +31,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static void destroyInstance() {
         INSTANCE = null;
-    }
+    }*/
+
 }
