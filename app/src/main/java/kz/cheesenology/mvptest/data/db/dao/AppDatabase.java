@@ -3,9 +3,8 @@ package kz.cheesenology.mvptest.data.db.dao;
 import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.Room;
+import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.RoomDatabase;
-import android.content.Context;
 
 import kz.cheesenology.mvptest.data.db.LocalCars;
 import kz.cheesenology.mvptest.data.db.LocalMark;
@@ -16,7 +15,18 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract CarsDao carsDao();
+
     public abstract MarkDao markDao();
+
+    @Override
+    protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
+        return null;
+    }
+
+    @Override
+    protected InvalidationTracker createInvalidationTracker() {
+        return null;
+    }
 
     /*public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {

@@ -2,6 +2,7 @@ package kz.cheesenology.mvptest.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.List;
 
@@ -15,16 +16,13 @@ import kz.cheesenology.mvptest.ui.view.CarsView;
 @InjectViewState
 public class CarsPresenter extends MvpPresenter<CarsView> {
 
-    @Inject
-    CarsDao carsDao;
-
     public void getCarsData(AppDatabase appDatabase) {
         List<LocalCarsMark> list = appDatabase.carsDao().getCarsData();
 
         getViewState().showData(list);
     }
 
-    public void getCarsData() {
+    public void getCarsData(CarsDao carsDao) {
         List<LocalCarsMark> list = carsDao.getCarsData();
 
         getViewState().showData(list);

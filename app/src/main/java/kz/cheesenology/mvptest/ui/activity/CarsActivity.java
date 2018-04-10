@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import kz.cheesenology.mvptest.MvpApplication;
 import kz.cheesenology.mvptest.R;
 import kz.cheesenology.mvptest.data.db.LocalCarsMark;
@@ -29,7 +31,11 @@ public class CarsActivity extends MvpAppCompatActivity
     @InjectPresenter
     CarsPresenter presenter;
 
-    private RecyclerView recyclerView;
+    @Inject
+    CarsDao carsDao;
+
+    @BindView(R.id.rv_cars)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +43,8 @@ public class CarsActivity extends MvpAppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cars);
 
+        ButterKnife.bind(this);
 
-        recyclerView = findViewById(R.id.rv_cars);
         GridLayoutManager gridLayout = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayout);
         recyclerView.setHasFixedSize(true);
@@ -47,8 +53,7 @@ public class CarsActivity extends MvpAppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-
-        presenter.getCarsData();
+        presenter.getCarsData(carsDao);
     }
 
     @Override

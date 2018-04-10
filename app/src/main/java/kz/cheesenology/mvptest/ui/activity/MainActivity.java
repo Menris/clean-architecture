@@ -11,6 +11,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import kz.cheesenology.mvptest.MvpApplication;
 import kz.cheesenology.mvptest.R;
 import kz.cheesenology.mvptest.data.db.LocalCars;
@@ -31,6 +33,7 @@ public class MainActivity extends MvpAppCompatActivity
     @Inject
     MarkDao markDao;
 
+    @BindView(R.id.btnSwitchActivity)
     Button btnClick;
 
     @Override
@@ -39,8 +42,8 @@ public class MainActivity extends MvpAppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
 
-        btnClick = findViewById(R.id.btnSwitchActivity);
         btnClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +51,7 @@ public class MainActivity extends MvpAppCompatActivity
             }
         });
 
-        populateCarsWithData();
+        //populateCarsWithData();
     }
 
     private LocalCars addCar(LocalCars cars) {
@@ -73,8 +76,6 @@ public class MainActivity extends MvpAppCompatActivity
         cars.setCarName("Enzo");
         cars.setMarkID(1);
         addCar(cars);
-
-
     }
 
     @Override
