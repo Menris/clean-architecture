@@ -10,6 +10,7 @@ import dagger.Provides;
 import kz.cheesenology.mvptest.data.db.dao.AppDatabase;
 import kz.cheesenology.mvptest.data.db.dao.CarsDao;
 import kz.cheesenology.mvptest.data.db.dao.MarkDao;
+import kz.cheesenology.mvptest.data.repository.CarsRepository;
 
 @Module
 public class ApplicationModule {
@@ -45,5 +46,11 @@ public class ApplicationModule {
     @Provides
     public MarkDao provideMarkDao(AppDatabase myDatabase) {
         return myDatabase.markDao();
+    }
+
+    @Provides
+    @Singleton
+    CarsRepository provideCarsRepository(CarsDao carsDao) {
+        return new CarsRepository(carsDao);
     }
 }

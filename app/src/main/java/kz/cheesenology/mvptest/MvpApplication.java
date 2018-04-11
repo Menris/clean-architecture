@@ -22,7 +22,6 @@ public class MvpApplication extends Application {
         Stetho.initializeWithDefaults(this);
         app = this;
 
-        //AppDatabase.getAppDatabase(getApplicationContext());
         appComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(getApplicationContext())).build();
     }

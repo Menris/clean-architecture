@@ -51,7 +51,7 @@ public class MainActivity extends MvpAppCompatActivity
             }
         });
 
-        //populateCarsWithData();
+        populateCarsWithData();
     }
 
     private LocalCars addCar(LocalCars cars) {

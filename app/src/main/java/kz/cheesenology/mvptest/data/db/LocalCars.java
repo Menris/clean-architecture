@@ -19,6 +19,8 @@ public class LocalCars {
     private String carName;
     @ColumnInfo(name = "mark_id")
     private int markID;
+    @ColumnInfo(name = "car_color")
+    private String carColor;
 
     public int getCarID() {
         return carID;
@@ -42,5 +44,13 @@ public class LocalCars {
 
     public void setMarkID(int markID) {
         this.markID = markID;
+    }
+
+    public String getCarColor() {
+        return carColor;
+    }
+
+    public void setCarColor(String carColor) {
+        this.carColor = carColor;
     }
 }

@@ -9,7 +9,7 @@ import android.arch.persistence.room.RoomDatabase;
 import kz.cheesenology.mvptest.data.db.LocalCars;
 import kz.cheesenology.mvptest.data.db.LocalMark;
 
-@Database(entities = {LocalCars.class, LocalMark.class}, version = 4, exportSchema = false)
+@Database(entities = {LocalCars.class, LocalMark.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

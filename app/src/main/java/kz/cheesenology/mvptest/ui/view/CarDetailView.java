@@ -5,5 +5,6 @@ import com.arellomobile.mvp.MvpView;
 
 public interface CarDetailView extends MvpView {
 
-    void showDetailsCarData();
+    void showDetailsCarData(String carName);
+    void showUpdateResult(String text);
 }

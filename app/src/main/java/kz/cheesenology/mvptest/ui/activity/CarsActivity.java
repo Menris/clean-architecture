@@ -18,9 +18,7 @@ import butterknife.ButterKnife;
 import kz.cheesenology.mvptest.MvpApplication;
 import kz.cheesenology.mvptest.R;
 import kz.cheesenology.mvptest.data.db.LocalCarsMark;
-import kz.cheesenology.mvptest.data.db.dao.AppDatabase;
 import kz.cheesenology.mvptest.data.db.dao.CarsDao;
-import kz.cheesenology.mvptest.di.ApplicationComponent;
 import kz.cheesenology.mvptest.presenter.CarsPresenter;
 import kz.cheesenology.mvptest.ui.adapter.CarsAdapter;
 import kz.cheesenology.mvptest.ui.view.CarsView;
@@ -31,15 +29,11 @@ public class CarsActivity extends MvpAppCompatActivity
     @InjectPresenter
     CarsPresenter presenter;
 
-    @Inject
-    CarsDao carsDao;
-
     @BindView(R.id.rv_cars)
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MvpApplication.app().appComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cars);
 
@@ -53,7 +47,7 @@ public class CarsActivity extends MvpAppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.getCarsData(carsDao);
+        presenter.getCarsData();
     }
 
     @Override
