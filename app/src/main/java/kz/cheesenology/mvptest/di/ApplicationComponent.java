@@ -12,9 +12,6 @@ import kz.cheesenology.mvptest.ui.activity.MainActivity;
 @Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-    void inject(MainActivity mainActivity);
-
-    void inject(CarsActivity carsActivity);
 
     void inject(CarsPresenter carsPresenter);
 
