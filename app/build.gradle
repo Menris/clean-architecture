@@ -10,16 +10,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
@@ -41,8 +46,11 @@ dependencies {
     implementation 'com.arello-mobile:moxy-app-compat:1.5.3'
     annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
     //Room
-    implementation "android.arch.persistence.room:runtime:1.0.0"
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    implementation 'android.arch.persistence.room:rxjava2:1.0.0'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     //DB View
     implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 }

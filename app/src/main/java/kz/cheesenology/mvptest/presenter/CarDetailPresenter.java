@@ -5,6 +5,9 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import kz.cheesenology.mvptest.MvpApplication;
 import kz.cheesenology.mvptest.data.repository.CarsRepository;
 import kz.cheesenology.mvptest.ui.view.CarDetailView;
@@ -19,10 +22,17 @@ public class CarDetailPresenter extends MvpPresenter<CarDetailView> {
         MvpApplication.app().appComponent().inject(this);
     }
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     //Логика получения деталей машины
     public void getDetails(Integer passID) {
-        String carName = carsRepository.getCarName(passID);
-        getViewState().showDetailsCarData(carName);
+        Disposable disposable = carsRepository.getCarName(passID)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        // on next
+                        (name) -> getViewState().showDetailsCarData(name),
+                        // on error
+                        Throwable::printStackTrace);
+        compositeDisposable.add(disposable);
     }
 
     public void updateValue(Integer passID, String newCarName) {
@@ -32,5 +42,11 @@ public class CarDetailPresenter extends MvpPresenter<CarDetailView> {
         } else {
             getViewState().showUpdateResult("Ошибка при обновлении");
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 }

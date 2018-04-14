@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -32,6 +33,9 @@ public class CarsActivity extends MvpAppCompatActivity
     @BindView(R.id.rv_cars)
     RecyclerView recyclerView;
 
+    @BindView(R.id.car_btn)
+    Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +46,8 @@ public class CarsActivity extends MvpAppCompatActivity
         GridLayoutManager gridLayout = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayout);
         recyclerView.setHasFixedSize(true);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.getCarsData();
+        button.setOnClickListener((view) -> presenter.insertRandomCar());
     }
 
     @Override
