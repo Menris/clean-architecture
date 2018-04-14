@@ -38,7 +38,7 @@ public class MainActivity extends MvpAppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //MvpApplication.app().appComponent().inject(this);
+        MvpApplication.app().appComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -51,7 +51,7 @@ public class MainActivity extends MvpAppCompatActivity
             }
         });
 
-        //populateCarsWithData();
+        populateCarsWithData();
     }
 
     private LocalCars addCar(LocalCars cars) {

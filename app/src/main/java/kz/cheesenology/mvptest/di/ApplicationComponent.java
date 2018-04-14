@@ -16,4 +16,7 @@ public interface ApplicationComponent {
     void inject(CarsPresenter carsPresenter);
 
     void inject(CarDetailPresenter carDetailPresenter);
+
+    void inject(MainActivity mainActivity);
+    
 }
